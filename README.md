@@ -22,13 +22,13 @@ This project serves as a personal learning endeavor to:
 
 - **Frontend:** React (TypeScript or JavaScript), Axios, React Router
 - **Backend:** ASP.NET Core Web API
-- **Database:** SQLite or SQL Server (depending on configuration)
+- **Database:** SQLite, PostgreSQL or SQL Server (depending on configuration)
 - **Authentication:** JWT-based login (with optional external providers)
 - **Hosting/Cloud (optional):** Cloudinary for image uploads
 
 ## 📷 Screenshots
 
-> _[Add screenshots or GIFs here if available]_
+> TODO
 
 ## 🚀 Getting Started
 
@@ -44,3 +44,4 @@ This project serves as a personal learning endeavor to:
    ```bash
    git clone https://github.com/yourusername/Reactivities.git
    cd Reactivities
+   [More to be added]
