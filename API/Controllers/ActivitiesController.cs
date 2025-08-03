@@ -2,13 +2,12 @@ using Application.Activities.Queries;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace API.Controllers;
 
 // Using primary constructor for Dependency Injection
-public class ActivitiesController(AppDbContext context, IMediator mediator) : BaseApiController
+public class ActivitiesController(IMediator mediator) : BaseApiController
 {
     #region Old Depenency Injection Method
     // Old dependency injection method
@@ -29,12 +28,17 @@ public class ActivitiesController(AppDbContext context, IMediator mediator) : Ba
     [HttpGet("{id}")]
     public async Task<ActionResult<Activity>> GetActivityDetail(string id)
     {
-        var activity = await context.Activities.FindAsync(id);
+        #region Old Implementation
+        //var activity = await context.Activities.FindAsync(id);
 
         // if (activity == null) return BadRequest(); // Error 400
 
-        if (activity == null) return NotFound(); // Error 404
-        
-        return activity;
+
+        //if (activity == null) return NotFound(); // Error 404
+
+        //return activity;
+        #endregion
+
+        return await mediator.Send(new GetActivityDetails.Query { Id = id });
     }
 }
