@@ -1,4 +1,6 @@
+using Application.Activities.Queries;
 using Domain;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -6,7 +8,7 @@ using Persistence;
 namespace API.Controllers;
 
 // Using primary constructor for Dependency Injection
-public class ActivitiesController(AppDbContext context) : BaseApiController
+public class ActivitiesController(AppDbContext context, IMediator mediator) : BaseApiController
 {
     #region Old Depenency Injection Method
     // Old dependency injection method
@@ -21,7 +23,7 @@ public class ActivitiesController(AppDbContext context) : BaseApiController
     [HttpGet]
     public async Task<ActionResult<List<Activity>>> GetActivities()
     {
-        return await context.Activities.ToListAsync();
+        return await mediator.Send(new GetActivityList.Query());
     }
 
     [HttpGet("{id}")]
@@ -31,7 +33,7 @@ public class ActivitiesController(AppDbContext context) : BaseApiController
 
         // if (activity == null) return BadRequest(); // Error 400
 
-        if (activity == null) return NotFound();
+        if (activity == null) return NotFound(); // Error 404
         
         return activity;
     }
