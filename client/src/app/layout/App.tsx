@@ -1,6 +1,7 @@
-import { List, ListItem, ListItemText, Typography } from "@mui/material";
+import { CssBaseline, List, ListItem, ListItemText } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Navbar from "./Navbar";
 
 function App() {
   // const title = 'Welcome to Reactivities' // Does not remember the value through the life cycle of the component.
@@ -16,7 +17,8 @@ function App() {
     //we can only return one tag in typescript but this tag can have more tags under it.
     //  alternatively:  <Fragment></Fragment>
     <>
-      <Typography variant="h3">Reactivities</Typography>
+    <CssBaseline/>
+      <Navbar/>
       <List>
         {activities.map((activity) => (
           <ListItem key={activity.id}>
