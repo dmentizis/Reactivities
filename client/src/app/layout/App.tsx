@@ -1,7 +1,8 @@
-import { Container, CssBaseline, List, ListItem, ListItemText } from "@mui/material";
+import { Container, CssBaseline } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
+import ActivityDashboard from "../../features/activities/ActivityDashboard";
 
 function App() {
   // const title = 'Welcome to Reactivities' // Does not remember the value through the life cycle of the component.
@@ -20,13 +21,7 @@ function App() {
     <CssBaseline/>
       <Navbar/>
       <Container maxWidth='xl' sx={{mt: 3}}>
-        <List>
-          {activities.map((activity) => (
-            <ListItem key={activity.id}>
-              <ListItemText>{activity.title}</ListItemText>
-            </ListItem>
-          ))}
-        </List>
+        <ActivityDashboard activities={activities}/>
       </Container>
     </>
   )
