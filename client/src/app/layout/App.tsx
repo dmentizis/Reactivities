@@ -5,8 +5,8 @@ import Navbar from "./Navbar";
 import ActivityDashboard from "../../features/activities/Dashboard/ActivityDashboard";
 
 function App() {
-  // const title = 'Welcome to Reactivities' // Does not remember the value through the life cycle of the component.
-  const [activities, setActivities] = useState<Activity[]>([]); // this hook solves the scope problem | here we declare the state's type/inteface
+    const [activities, setActivities] = useState<Activity[]>([]);
+    const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
 
   //callback function inside the hook
   useEffect(() => {
@@ -14,14 +14,25 @@ function App() {
       .then(response => setActivities(response.data))
   }, [])
 
+  const handleSelectActivity = (id: string) => {
+    setSelectedActivity(activities.find(a => a.id === id));
+  } 
+
+  const handleCancelSelectActivity = () => {
+    setSelectedActivity(undefined);
+  }
+
   return (
-    //we can only return one tag in typescript but this tag can have more tags under it.
-    //  alternatively:  <Fragment></Fragment>
     <Box sx={{bgcolor: '#eeeeee'}}>
     <CssBaseline/>
       <Navbar/>
       <Container maxWidth='xl' sx={{mt: 3}}>
-        <ActivityDashboard activities={activities}/>
+        <ActivityDashboard 
+        activities={activities}
+        selectActivity={handleSelectActivity}
+        cancelSelectActivity={handleCancelSelectActivity}
+        selectedActivity={selectedActivity}
+        />
       </Container>
     </Box>
   )
